@@ -1,0 +1,253 @@
+/* ELVANOQ Play VIDAA — sistema visual premium.
+ * Composição: ELVANOQ Play Roku 0.1.88 (palco 1920x1080).
+ * Acabamento: tokens do app Android (constants/brand.ts, constants/theme.ts),
+ * convertidos de dp (TV 960x540) para px FHD (x2).
+ */
+@font-face { font-family: "Inter"; font-weight: 400; src: url("../fonts/Inter-Regular.woff") format("woff"); }
+@font-face { font-family: "Inter"; font-weight: 500; src: url("../fonts/Inter-Medium.woff") format("woff"); }
+@font-face { font-family: "Inter"; font-weight: 600; src: url("../fonts/Inter-SemiBold.woff") format("woff"); }
+@font-face { font-family: "Inter"; font-weight: 700; src: url("../fonts/Inter-Bold.woff") format("woff"); }
+
+:root {
+  --bg: #070b14;
+  --surface: #0d1422;
+  --surface-alt: #111b2d;
+  --deep-blue: #0a2a66;
+  --primary: #147dff;
+  --accent: #00d7ff;
+  --text: #f4f8ff;
+  --muted: #8894a8;
+  --subtle: #63728a;
+  --soft: #c9d3e3;
+  --body: #d6deeb;
+  --border: rgba(190, 222, 255, 0.10);
+  --border-strong: rgba(190, 222, 255, 0.18);
+  --success: #16c784;
+  --warning: #f5b83d;
+  --error: #ff5c72;
+  --font-small: 22px;
+  --font-medium: 26px;
+  --font-large: 44px;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #02070d; cursor: default; }
+
+#stage {
+  position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden;
+  transform-origin: 0 0; background: var(--bg); color: var(--text);
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sg-group, .sg-rect, .sg-label, .sg-poster, .sg-video, .sg-grid, .sg-tile, .el { position: absolute; box-sizing: border-box; }
+.sg-group { left: 0; top: 0; }
+.layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; isolation: isolate; }
+.sg-grid { z-index: 0; }
+
+.sg-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.25; color: var(--text); }
+.sg-label.wrap { white-space: normal; text-overflow: clip; }
+.sg-label.pre { white-space: pre-line; text-overflow: clip; }
+.sg-label.font-small { font-size: var(--font-small); }
+.sg-label.font-medium { font-size: var(--font-medium); }
+.sg-label.font-large { font-size: var(--font-large); letter-spacing: -0.02em; }
+.sg-label.bold, .w700 { font-weight: 700; }
+.w600 { font-weight: 600; }
+.w500 { font-weight: 500; }
+.clamp2, .clamp3, .clamp4, .clamp5, .clamp6 { display: -webkit-box !important; -webkit-box-orient: vertical; white-space: normal; }
+.clamp2 { -webkit-line-clamp: 2; }
+.clamp3 { -webkit-line-clamp: 3; }
+.clamp4 { -webkit-line-clamp: 4; }
+.clamp5 { -webkit-line-clamp: 5; }
+.clamp6 { -webkit-line-clamp: 6; }
+.eyebrow { font-size: 18px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+.muted { color: var(--muted); }
+.over-video { text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9); }
+
+.sg-poster { background-repeat: no-repeat; background-position: center; }
+.sg-poster.fill { background-size: cover; }
+.sg-poster.fit { background-size: contain; }
+.sg-video { background: #000; object-fit: contain; }
+video.sg-video::-webkit-media-controls { display: none !important; }
+
+.icon { display: inline-block; vertical-align: middle; }
+.icon svg { display: block; width: 100%; height: 100%; }
+
+/* ---------- superfícies ---------- */
+.panel { background: rgba(13, 20, 34, 0.86); border: 1px solid var(--border); border-radius: 22px; }
+.glass { background: rgba(17, 27, 45, 0.82); border: 1px solid rgba(244, 248, 255, 0.14); }
+.divider { height: 2px; background: linear-gradient(90deg, rgba(123, 63, 228, 0.0), rgba(123, 63, 228, 0.35) 40%, rgba(20, 125, 255, 0.25) 80%, rgba(20, 125, 255, 0)); }
+
+/* ---------- botões (Android: actionPrimary / actionGlass / actionFocused) ---------- */
+.btn {
+  position: absolute; box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 12px;
+  height: 64px; padding: 0 30px; border-radius: 14px; font-size: 25px; font-weight: 700; white-space: nowrap;
+  color: var(--text); background: var(--surface-alt); border: 2px solid rgba(244, 248, 255, 0.10);
+  transition: transform 160ms var(--ease);
+}
+.btn .icon { width: 24px; height: 24px; flex: none; }
+.btn span { overflow: hidden; text-overflow: ellipsis; }
+.btn.primary { background: var(--text); color: var(--bg); border-color: transparent; }
+.btn.focused { background: #fff; color: var(--bg); border-color: transparent; box-shadow: 0 0 0 6px var(--accent), 0 14px 34px rgba(0, 215, 255, 0.22); }
+.btn { font-size: 24px; font-weight: 600; padding: 0 18px; gap: 10px; }
+.btn.round { width: 64px; padding: 0; border-radius: 32px; }
+.btn.danger { color: var(--error); }
+
+/* ---------- pôsteres (Android PosterCard em TV) ---------- */
+.sg-tile, .poster {
+  background-color: var(--surface); background-size: cover; background-position: center; background-repeat: no-repeat;
+  border-radius: 14px; border: 1px solid var(--border); overflow: hidden;
+  transition: transform 180ms var(--ease);
+}
+.sg-tile .tile-fallback, .poster .tile-fallback {
+  position: absolute; left: 14px; right: 14px; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center; text-align: center;
+  font-size: 21px; font-weight: 600; line-height: 1.25; color: var(--muted); white-space: normal; overflow: hidden;
+}
+.sg-tile.has-art .tile-fallback, .poster.has-art .tile-fallback { display: none; }
+.sg-tile::after, .poster::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 34%; background: linear-gradient(rgba(7, 11, 20, 0), rgba(7, 11, 20, 0.55)); pointer-events: none; }
+.badge { position: absolute; top: 10px; right: 10px; padding: 3px 8px; border-radius: 6px; background: rgba(7, 11, 20, 0.78); font-size: 15px; font-weight: 700; color: var(--text); z-index: 1; }
+.badge.rating { color: var(--warning); }
+.sg-grid.focused .sg-tile.focused, .poster.focused {
+  border-color: transparent; z-index: 2; transform: scale(1.03);
+  box-shadow: 0 0 0 6px var(--accent), 0 18px 40px rgba(0, 0, 0, 0.55);
+}
+.progress-track { position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: rgba(255, 255, 255, 0.2); z-index: 1; }
+.progress-fill { height: 100%; background: var(--accent); }
+
+/* ---------- blocos da Home (Roku 0.1.88) ---------- */
+.hub-tile {
+  position: absolute; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  border-radius: 16px; background: var(--surface); border: 1px solid rgba(190, 222, 255, 0.07);
+  transition: transform 180ms var(--ease);
+}
+.hub-tile { justify-content: flex-start; padding-top: 24px; gap: 10px; }
+.hub-tile .icon { width: 64px; height: 64px; color: #fff; }
+.hub-tile .hub-label { font-size: 24px; font-weight: 400; color: var(--text); line-height: 40px; }
+.hub-tile.focused {
+  background: linear-gradient(135deg, #1a86ff 0%, #147dff 55%, #0f55c4 100%);
+  box-shadow: 0 0 0 6px var(--accent), 0 18px 40px rgba(20, 125, 255, 0.35);
+}
+
+/* ---------- painel de categorias (BrowseView) ---------- */
+.cat-row {
+  position: absolute; box-sizing: border-box; left: 12px; right: 12px; height: 52px; display: flex; align-items: center; gap: 14px;
+  padding: 0 16px 0 20px; border-radius: 14px; border: 2px solid transparent; font-size: 22px; color: var(--soft);
+}
+.cat-row .icon { width: 22px; height: 22px; color: var(--accent); }
+.cat-row .cat-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cat-row .cat-count { font-size: 18px; color: var(--muted); }
+.cat-row.selected { background: rgba(0, 215, 255, 0.06); color: var(--accent); font-weight: 600; }
+.cat-row.selected .cat-count { color: var(--accent); }
+.cat-row.selected::before { content: ""; position: absolute; left: 0; top: 12px; bottom: 12px; width: 4px; border-radius: 2px; background: var(--accent); }
+.cat-row.focused { background: var(--primary); border-color: var(--accent); color: #fff; font-weight: 600; }
+.cat-row.focused .cat-count, .cat-row.focused .icon { color: #fff; }
+
+/* ---------- chips (temporadas, filtros, abas) ---------- */
+.chip {
+  position: absolute; box-sizing: border-box; height: 56px; line-height: 52px; padding: 0 28px; border-radius: 28px; white-space: nowrap;
+  font-size: 22px; font-weight: 500; color: var(--soft); background: rgba(17, 27, 45, 0.78); border: 2px solid rgba(190, 222, 255, 0.16);
+  transition: transform 160ms var(--ease);
+}
+.chip.selected { color: #fff; font-weight: 600; border-color: rgba(0, 215, 255, 0.55); background: rgba(0, 215, 255, 0.12); }
+.chip.focused { color: #fff; background: var(--primary); border-color: var(--accent); transform: scale(1.04); }
+
+/* ---------- linhas de lista (Minha Lista, Ajustes, TV ao Vivo) ---------- */
+.row-item { position: absolute; box-sizing: border-box; display: flex; align-items: center; gap: 18px; border-radius: 14px; border: 2px solid transparent; }
+.row-item.focused { background: var(--primary); border-color: var(--accent); }
+.row-item.selected { background: rgba(0, 215, 255, 0.07); }
+.row-item.focused span, .row-item.focused div { color: #fff !important; }
+
+/* ---------- Ajustes (TvSettingsDashboard) ---------- */
+.set-tile {
+  position: absolute; box-sizing: border-box; display: flex; align-items: center; gap: 22px; padding: 0 26px;
+  border-radius: 20px; border: 2px solid rgba(190, 222, 255, 0.17); background: rgba(15, 23, 38, 0.82);
+  transition: transform 160ms var(--ease);
+}
+.set-tile .set-icon { width: 76px; height: 76px; flex: none; display: flex; align-items: center; justify-content: center; border-radius: 22px; background: rgba(59, 130, 246, 0.13); border: 2px solid rgba(147, 197, 253, 0.2); color: var(--accent); }
+.set-tile .set-icon .icon { width: 40px; height: 40px; }
+.set-tile .set-copy { flex: 1; min-width: 0; }
+.set-tile .set-title { font-size: 28px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.set-tile .set-meta { margin-top: 6px; font-size: 20px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.set-tile .chev { width: 30px; height: 30px; color: var(--subtle); }
+.set-tile.focused { background: var(--primary); border-color: var(--accent); transform: scale(1.02); }
+.set-tile.focused .set-icon { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.3); color: #fff; }
+.set-tile.focused .set-meta, .set-tile.focused .chev { color: rgba(255, 255, 255, 0.85); }
+.status-item { position: absolute; }
+.status-item .status-label { font-size: 16px; font-weight: 600; letter-spacing: 0.08em; color: var(--subtle); }
+.status-item .status-value { margin-top: 8px; font-size: 24px; font-weight: 600; color: var(--text); white-space: nowrap; }
+.status-item .status-value.success { color: var(--success); }
+.status-item .status-value.warning { color: var(--warning); }
+
+/* ---------- teclado PIN ---------- */
+.pin-key { position: absolute; box-sizing: border-box; width: 112px; height: 76px; line-height: 72px; text-align: center; border-radius: 16px; font-size: 32px; font-weight: 600; background: var(--surface-alt); border: 2px solid var(--border); }
+.pin-key.focused { background: var(--primary); border-color: var(--accent); transform: scale(1.05); }
+.pin-dot { position: absolute; width: 26px; height: 26px; border-radius: 13px; border: 3px solid var(--muted); box-sizing: border-box; }
+.pin-dot.filled { background: var(--accent); border-color: var(--accent); }
+
+/* ---------- diálogo de teclado ---------- */
+.kb-backdrop { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; background: rgba(2, 5, 12, 0.78); z-index: 50; }
+.kb-card { position: absolute; left: 480px; top: 230px; width: 960px; padding: 52px 60px; box-sizing: border-box; border-radius: 28px; background: rgba(13, 20, 34, 0.97); border: 1px solid var(--border-strong); box-shadow: 0 40px 90px rgba(0, 0, 0, 0.6); }
+.kb-title { font-size: 40px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.02em; }
+.kb-message { font-size: 22px; color: var(--muted); margin: 0 0 32px; }
+.kb-input {
+  display: block; width: 100%; box-sizing: border-box; height: 84px; padding: 0 28px; border-radius: 16px;
+  font: inherit; font-size: 30px; color: var(--text); background: var(--surface-alt); border: 2px solid var(--border-strong); outline: 0;
+}
+.kb-input.focused { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.kb-buttons { margin-top: 36px; height: 72px; display: flex; gap: 18px; }
+.kb-button { min-width: 240px; height: 68px; line-height: 64px; padding: 0 32px; box-sizing: border-box; border-radius: 14px; font-size: 24px; font-weight: 700; text-align: center; background: var(--surface-alt); border: 2px solid rgba(244, 248, 255, 0.1); color: var(--text); }
+.kb-button:first-child { background: var(--text); color: var(--bg); }
+.kb-button.focused { background: #fff; color: var(--bg); border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); transform: scale(1.04); }
+
+/* ---------- player ---------- */
+.osd-control { position: absolute; box-sizing: border-box; height: 56px; display: flex; align-items: center; justify-content: center; gap: 10px; border-radius: 28px; font-size: 22px; font-weight: 600; color: var(--soft); background: rgba(17, 27, 45, 0.55); }
+.osd-control .icon { width: 28px; height: 28px; }
+.osd-control.focused { background: #f4f8ff; color: var(--bg); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); }
+.timeline { position: absolute; height: 6px; border-radius: 3px; background: rgba(244, 248, 255, 0.25); overflow: hidden; }
+.timeline .fill { height: 100%; border-radius: 4px; background: var(--accent); }
+
+.fade { transition: opacity 260ms var(--ease); }
+.slide-content { transition: opacity 380ms var(--ease), transform 420ms var(--ease); }
+.slide-content.entering { opacity: 0; transform: translateY(14px); }
+.scroller { transition: transform 360ms var(--ease); }
+.hidden { display: none !important; }
+
+/* Ativação (MainScene do Roku 0.1.88) */
+.outline-action { position: absolute; box-sizing: border-box; border: 2px solid #8894a8; border-radius: 14px; background: rgba(13, 20, 34, 0.9); color: var(--text); font-size: 22px; font-weight: 600; display: flex; align-items: center; justify-content: center; white-space: pre; }
+.status-dot { position: absolute; border-radius: 9px; background: var(--accent); }
+.status-dot.pulse { animation: status-pulse 1.4s ease-in-out infinite; }
+@keyframes status-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+/* Splash de abertura (splash_fhd do Roku): cobre a tela até o app ficar pronto */
+#boot-splash { position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 100; background: #02070d url(../images/splash.jpg) center / cover no-repeat; transition: opacity 320ms ease-out; }
+#boot-splash.hidden { opacity: 0; }
+
+/* ---------- 1.1.0: páginas premium (Ajustes, Controle parental,
+ * Categorias visíveis, Diagnóstico, Sobre). Animações só com transform e
+ * opacity, para não travar webOS 4/5. ---------- */
+.premium-glow { position: absolute; background: linear-gradient(rgba(20, 125, 255, 0.22), rgba(20, 125, 255, 0)); pointer-events: none; }
+.premium-card { position: absolute; box-sizing: border-box; border-radius: 16px; background: rgba(13, 20, 34, 0.72); border: 1px solid rgba(190, 222, 255, 0.10); }
+.premium-row { position: absolute; box-sizing: border-box; display: flex; align-items: center; gap: 20px; padding: 0 28px; border-radius: 16px; background: rgba(13, 20, 34, 0.72); border: 1px solid rgba(190, 222, 255, 0.10); color: var(--text); font-size: 24px; transition: transform 160ms ease-out; }
+.premium-row.compact { border-radius: 12px; padding: 0 20px; font-size: 22px; background: transparent; border-color: transparent; gap: 16px; }
+.premium-row.focused { border: 2px solid #00d7ff; padding-left: 27px; padding-right: 27px; transform: scale(1.01); }
+.premium-row.compact.focused { padding-left: 19px; padding-right: 19px; background: rgba(20, 125, 255, 0.12); transform: none; }
+.premium-row.dimmed .pr-label { opacity: 0.55; }
+.premium-row .pr-icon { width: 34px; height: 34px; flex: none; color: #00d7ff; }
+.premium-row .pr-icon svg, .pr-bigicon svg { width: 100%; height: 100%; }
+.premium-row .pr-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.premium-row .pr-title { font-size: 25px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.premium-row .pr-sub { font-size: 18px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.premium-row .pr-label { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.premium-row .pr-meta { flex: none; font-size: 20px; color: #b8c4d6; white-space: nowrap; }
+.premium-row .pr-chev { width: 22px; height: 22px; flex: none; color: var(--muted); }
+.premium-row .pr-badge { flex: none; font-size: 15px; font-weight: 700; letter-spacing: 0.06em; color: #00d7ff; border: 1px solid rgba(0, 215, 255, 0.45); border-radius: 999px; padding: 4px 12px; }
+.premium-row .pr-state { flex: none; min-width: 120px; text-align: right; font-size: 16px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #00d7ff; }
+.premium-row .pr-state.off { color: #63728a; }
+.pr-bigicon { position: absolute; color: #00d7ff; }
+.premium-tab { position: absolute; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border-radius: 999px; font-size: 21px; font-weight: 600; color: var(--muted); background: rgba(13, 20, 34, 0.72); border: 1px solid rgba(190, 222, 255, 0.10); }
+.premium-tab.active { background: #f4f8ff; color: #070b14; border-color: #f4f8ff; }
+.premium-button { position: absolute; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border-radius: 999px; font-size: 22px; font-weight: 600; background: rgba(13, 20, 34, 0.72); border: 1px solid rgba(190, 222, 255, 0.10); color: var(--text); }
+.premium-button.focused { background: #f4f8ff; color: #070b14; border-color: #f4f8ff; }
+.premium-key { background: rgba(13, 20, 34, 0.72); border: 1px solid rgba(190, 222, 255, 0.10); box-shadow: none; }
+.premium-key.focused { background: #f4f8ff; color: #070b14; border: 2px solid #00d7ff; box-shadow: none; transform: scale(1.03); }
+.lock-row .icon svg { width: 100%; height: 100%; }

@@ -1,0 +1,27 @@
+name = "elvanoq-play-vidaa"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+# O app (pasta public/) é servido pelo próprio Worker.
+[assets]
+directory = "../public"
+binding = "ASSETS"
+run_worker_first = true
+
+[vars]
+APP_VERSION = "1.0.0"
+
+# Chave publicável do Supabase (a mesma usada pelos apps LG/Roku/Samsung):
+#   npx wrangler secret put PORTAL_KEY
+
+# Endereço da loja VIDAA (HTTPS obrigatório)
+[[routes]]
+pattern = "vidaa.elvanoqplay.app"
+custom_domain = true
+
+# Cópia em HTTP puro (testes e TVs que bloqueiam vídeo http:// em página HTTPS).
+# Na zona elvanoqplay.com já estão desligados "Always Use HTTPS",
+# "Automatic HTTPS Rewrites" e HSTS (mesma configuração do Samsung/MSX).
+[[routes]]
+pattern = "vidaa.elvanoqplay.com"
+custom_domain = true
