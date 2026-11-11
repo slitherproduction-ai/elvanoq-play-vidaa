@@ -32,11 +32,10 @@ O vídeo **não** passa pelo relay: a TV toca direto do servidor da lista.
 
 ## Publicação
 
-### 1. Portal (obrigatório antes do primeiro teste)
-Sem isto a TV não ativa: o Portal ainda não conhece a plataforma `vidaa`.
-- `portal/migration-vidaa.sql`: libera `vidaa` na tabela `portal_webos_devices` e na função `portal_webos_device_register`.
-- `portal/portal-control-vidaa.patch`: aceita códigos `VD-` (QR/site, checkout, vínculo) e o login por código do servidor com `platform: "vidaa"`.
-- O formulário `elvanoqplay.app/adicionar-lista` precisa aceitar `VD-` como já aceita `LG-`/`SM-`.
+### 1. Portal — aplicado em 11/11/2026
+- `portal/migration-vidaa.sql` (migração `vidaa_platform`): libera `vidaa` na tabela `portal_webos_devices` e na função `portal_webos_device_register` (cria a TV como "TV VIDAA").
+- `portal/portal-control-vidaa.patch`: publicado como `portal-control` v57. Aceita códigos `VD-` (QR/site, checkout, vínculo pelo painel) e o login por código do servidor com `platform: "vidaa"`.
+- **Pendente:** o formulário `elvanoqplay.app/adicionar-lista` precisa aceitar `VD-` como já aceita `LG-`/`SM-` (o Portal já aceita).
 
 ### 2. Worker
 GitHub → **Actions → Deploy VIDAA Worker → Run workflow**. Secrets do repositório: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` e `PORTAL_KEY` (os mesmos do `elvanoq-play-msx`).
